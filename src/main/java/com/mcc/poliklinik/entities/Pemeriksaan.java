@@ -22,6 +22,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -47,6 +48,7 @@ public class Pemeriksaan implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "tanggal")
+//    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date tanggal;
     @Basic(optional = false)

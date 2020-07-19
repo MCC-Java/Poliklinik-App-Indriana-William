@@ -13,18 +13,22 @@ and open the template in the editor.
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
     </head>
     <body>
-        <nav class="navbar navbar-light bg-light">
-            <ul class="nav justify-content-end">
-                <li class="nav-item">
-                    <a class="nav-link active" href="">Pasien</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Dokter</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pemeriksaan</a>
-                </li>
-            </ul>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Navbar</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Link</a>
+                    </li>
+                </ul>
+            </div>
         </nav>
         <div class="container">
             <div align="center">
@@ -47,8 +51,8 @@ and open the template in the editor.
                             <td th:text="${pasien.id}"></td>
                             <td th:text="${pasien.nama}"></td>
                             <td>
-                                <a th:href="@{'/pasien/'+${pasien.id}}" class="btn btn-warning">get</a>
-                                <a th:href="@{'/pasien/delete/'+${pasien.id}}" class="btn btn-danger">delete</a>
+                                <a th:href="@{'/pasien/'+${pasien.id}}" class="btn btn-warning">Update</a>
+                                <a th:href="@{'/pasien/delete/'+${pasien.id}}" class="btn btn-danger">Delete</a>
                             </td>
                         </tr>
                     </tbody>
@@ -69,13 +73,13 @@ and open the template in the editor.
                     <form th:action="@{/pasien/save}" th:object="${pasien}" method="POST">
                         <div class="modal-body">
                             <label>NIM/NIP</label>
-                            <input type="text" id="textId" class="form-control" th:field="*{id}">
+                            <input type="text" id="textId" class="form-control" th:field="*{id}" required>
                             <label>Nama</label>
-                            <input type="text" id="textNama" class="form-control" th:field="*{nama}">
+                            <input type="text" id="textNama" class="form-control" th:field="*{nama}" required>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save</button>
+                            <input class="btn btn-success" type="submit" value="Save" style="margin: 10px;">
                         </div>
                     </form>
                 </div>
