@@ -4,6 +4,7 @@
     <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
     <class>com.mcc.poliklinik.entities.Pasien</class>
     <class>com.mcc.poliklinik.entities.Pemeriksaan</class>
+    <class>com.mcc.poliklinik.entities.Dokter</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/mccoc?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

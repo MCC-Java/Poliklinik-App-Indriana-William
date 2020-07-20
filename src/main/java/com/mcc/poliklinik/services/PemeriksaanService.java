@@ -10,6 +10,7 @@ import com.mcc.poliklinik.repositories.PemeriksaanRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  *
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Service;
  */
 
 @Service
+@Transactional
 public class PemeriksaanService {
     
     @Autowired
@@ -26,8 +28,9 @@ public class PemeriksaanService {
         return pemeriksaanRepository.findAll();
     }
     
-    public void save(Pemeriksaan pemeriksaan) {
-        pemeriksaanRepository.save(pemeriksaan);
+    public void save(String id, String tanggal, String deskripsi, String dokter, String pasien) {
+        Integer key = Integer.parseInt(id);
+        pemeriksaanRepository.savetopemeriksaan(key, tanggal, deskripsi, dokter, pasien);
     }
     
     public void delete(Integer id) {

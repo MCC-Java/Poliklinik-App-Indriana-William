@@ -24,10 +24,10 @@ and open the template in the editor.
                     <li class="nav-item">
                         <a class="nav-link" href="/">Pemeriksaan</a>
                     </li>
-                    <li class="nav-item active">
+                    <li class="nav-item">
                         <a class="nav-link" href="pasien">Pasien</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item active">
                         <a class="nav-link" href="dokter">Dokter</a>
                     </li>
                 </ul>
@@ -35,27 +35,29 @@ and open the template in the editor.
         </nav>
         <div class="container">
             <div align="center">
-                <h1 style="margin-top: 25px;">Pasien</h1>
+                <h1 style="margin-top: 25px;">List Dokter</h1>
                 <div class="container" align="right" style="margin-bottom: 25px;">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addPasienModal">
-                        Add patient
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addDokterModal">
+                        Add doctor
                     </button>    
                 </div>
-                <table class="table" id="tablepasien">
+                <table class="table" id="tabledokter">
                     <thead>
                         <tr>
                             <th>No.</th>
                             <th>Nama</th>
+                            <th>Poli</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="pasien: ${pasiens}">
-                            <td th:text="${pasien.id}"></td>
-                            <td th:text="${pasien.nama}"></td>
+                        <tr th:each="dokter: ${dokters}">
+                            <td th:text="${dokter.id}"></td>
+                            <td th:text="${dokter.nama}"></td>
+                            <td th:text="${dokter.poli}"></td>
                             <td>
-                                <a th:href="@{'/pasien/'+${pasien.id}}" class="btn btn-warning">Update</a>
-                                <a th:href="@{'/pasien/delete/'+${pasien.id}}" class="btn btn-danger">Delete</a>
+                                <a th:href="@{'/dokter/'+${dokter.id}}" class="btn btn-warning">Update</a>
+                                <a th:href="@{'/dokter/delete/'+${dokter.id}}" class="btn btn-danger">Delete</a>
                             </td>
                         </tr>
                     </tbody>
@@ -64,21 +66,23 @@ and open the template in the editor.
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="addPasienModal" tabindex="-1" role="dialog" aria-labelledby="addPasienLabel" aria-hidden="true">
+        <div class="modal fade" id="addDokterModal" tabindex="-1" role="dialog" aria-labelledby="addDokterLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="addPasienLabel">New Patient</h5>
+                        <h5 class="modal-title" id="addDokterLabel">New Doctor</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
-                    <form th:action="@{/pasien/save}" th:object="${pasien}" method="POST">
+                    <form th:action="@{/dokter/save}" th:object="${dokter}" method="POST">
                         <div class="modal-body">
-                            <label>NIM/NIP</label>
+                            <label>No. Doctor</label>
                             <input type="text" id="textId" class="form-control" th:field="*{id}" required>
                             <label>Nama</label>
                             <input type="text" id="textNama" class="form-control" th:field="*{nama}" required>
+                            <label>Poli</label>
+                            <input type="text" id="textPoli" class="form-control" th:field="*{poli}" required>
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -104,7 +108,7 @@ and open the template in the editor.
         <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
         <script>
             $(document).ready(function () {
-                $('#tablepasien').DataTable();
+                $('#tabledokter').DataTable();
             });
         </script>
 

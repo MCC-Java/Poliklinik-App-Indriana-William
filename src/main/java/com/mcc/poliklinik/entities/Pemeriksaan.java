@@ -6,7 +6,6 @@
 package com.mcc.poliklinik.entities;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -19,12 +18,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlRootElement;
-import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  *
@@ -37,7 +33,6 @@ import org.springframework.format.annotation.DateTimeFormat;
     @NamedQuery(name = "Pemeriksaan.findAll", query = "SELECT p FROM Pemeriksaan p")
     , @NamedQuery(name = "Pemeriksaan.findById", query = "SELECT p FROM Pemeriksaan p WHERE p.id = :id")
     , @NamedQuery(name = "Pemeriksaan.findByTanggal", query = "SELECT p FROM Pemeriksaan p WHERE p.tanggal = :tanggal")
-    , @NamedQuery(name = "Pemeriksaan.findByDokter", query = "SELECT p FROM Pemeriksaan p WHERE p.dokter = :dokter")
     , @NamedQuery(name = "Pemeriksaan.findByDeskripsi", query = "SELECT p FROM Pemeriksaan p WHERE p.deskripsi = :deskripsi")})
 public class Pemeriksaan implements Serializable {
 
@@ -49,24 +44,21 @@ public class Pemeriksaan implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "tanggal")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    @Temporal(TemporalType.DATE)
-    private Date tanggal;
-    @Basic(optional = false)
-    @NotNull
     @Size(min = 1, max = 50)
-    @Column(name = "dokter")
-    private String dokter;
+    @Column(name = "tanggal")
+    private String tanggal;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 50)
     @Column(name = "deskripsi")
     private String deskripsi;
+    @JoinColumn(name = "dokter", referencedColumnName = "id")
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    private Dokter dokter;
     @JoinColumn(name = "pasien", referencedColumnName = "id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Pasien pasien;
-
+    
     public Pemeriksaan() {
     }
 
@@ -74,10 +66,9 @@ public class Pemeriksaan implements Serializable {
         this.id = id;
     }
 
-    public Pemeriksaan(Integer id, Date tanggal, String dokter, String deskripsi) {
+    public Pemeriksaan(Integer id, String tanggal, String deskripsi) {
         this.id = id;
         this.tanggal = tanggal;
-        this.dokter = dokter;
         this.deskripsi = deskripsi;
     }
 
@@ -89,20 +80,12 @@ public class Pemeriksaan implements Serializable {
         this.id = id;
     }
 
-    public Date getTanggal() {
+    public String getTanggal() {
         return tanggal;
     }
 
-    public void setTanggal(Date tanggal) {
+    public void setTanggal(String tanggal) {
         this.tanggal = tanggal;
-    }
-
-    public String getDokter() {
-        return dokter;
-    }
-
-    public void setDokter(String dokter) {
-        this.dokter = dokter;
     }
 
     public String getDeskripsi() {
@@ -113,7 +96,17 @@ public class Pemeriksaan implements Serializable {
         this.deskripsi = deskripsi;
     }
 
+    public Dokter getDokter() {
+        String namaDokter = dokter.getNama();
+        return dokter;
+    }
+
+    public void setDokter(Dokter dokter) {
+        this.dokter = dokter;
+    }
+
     public Pasien getPasien() {
+        String namaPasien = pasien.getNama();
         return pasien;
     }
 

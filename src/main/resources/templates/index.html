@@ -23,9 +23,13 @@ and open the template in the editor.
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="">Pemeriksaan</a>
+                        <a class="nav-link active" href="/">Pemeriksaan</a>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="pasien">Pasien</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="dokter">Dokter</a>
                     </li>
                 </ul>
             </div>
@@ -88,7 +92,8 @@ and open the template in the editor.
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label>Tanggal</label>
-                                    <input type="date" class="form-control datepicker" th:field="*{tanggal}" required>
+                                    <input type="text" class="form-control" id="textTanggal" th:field="*{tanggal}" required>
+                                    <!--<input type="date" class="form-control datepicker" th:field="*{tanggal}" required>-->
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label>Pasien</label>
@@ -103,11 +108,18 @@ and open the template in the editor.
                                 </div>
                                 <div class="col-md-6 mb-3">
                                     <label>Dokter</label>
-                                    <input type="text" class="form-control" id="textDokter" th:field="*{dokter}" required>
+                                    <select class="custom-select" id="textDokter" required>
+                                        <option>...</option>
+                                        <option th:each="dokter: ${dokters}"
+                                                th:text="${dokter.nama}"
+                                                th:value="${dokter.nama}"
+                                                >
+                                        </option>
+                                    </select>
                                 </div>
                                 <div class="col-md-12 mb-3">
                                     <label>Deskripsi</label>
-                                    <input type="text" class="form-control" id="textDeskripsi" th:field="*{deskripsi}" required>
+                                    <textarea type="text" class="form-control" id="textDeskripsi" th:field="*{deskripsi}" required/>
                                 </div>
                             </div>
                         </div>

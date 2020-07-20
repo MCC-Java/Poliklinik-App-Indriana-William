@@ -5,7 +5,10 @@
  */
 package com.mcc.poliklinik.controller;
 
+import com.mcc.poliklinik.entities.Dokter;
+import com.mcc.poliklinik.entities.Pasien;
 import com.mcc.poliklinik.entities.Pemeriksaan;
+import com.mcc.poliklinik.services.DokterService;
 import com.mcc.poliklinik.services.PasienService;
 import com.mcc.poliklinik.services.PemeriksaanService;
 import javax.validation.Valid;
@@ -27,18 +30,24 @@ public class PemeriksaanController {
 
     @Autowired
     PasienService pasienService;
+    
+    @Autowired
+    DokterService dokterService;
 
     @GetMapping("")
     public String index(Model model) {
         model.addAttribute("pemeriksaan", new Pemeriksaan());
         model.addAttribute("pemeriksaans", pemeriksaanService.getAll());
+        model.addAttribute("pasien", new Pasien());
         model.addAttribute("pasiens", pasienService.getAll());
+        model.addAttribute("dokter", new Dokter());
+        model.addAttribute("dokters", dokterService.getAll());
         return "index";
     }
 
     @PostMapping("/save")
-    public String save(@Valid Pemeriksaan pemeriksaan) {
-        pemeriksaanService.save(pemeriksaan);
+    public String save(@Valid String id, String tanggal, String deskripsi, String dokter, String pasien) {
+        pemeriksaanService.save(id, tanggal, deskripsi, dokter, pasien);
         return "redirect:/";
     }
 }
