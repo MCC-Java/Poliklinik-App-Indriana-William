@@ -19,16 +19,15 @@ import org.springframework.web.bind.annotation.PostMapping;
  *
  * @author ASUS-PC
  */
-
 @Controller
 public class PemeriksaanController {
-    
+
     @Autowired
     PemeriksaanService pemeriksaanService;
-    
+
     @Autowired
     PasienService pasienService;
-    
+
     @GetMapping("")
     public String index(Model model) {
         model.addAttribute("pemeriksaan", new Pemeriksaan());
@@ -36,9 +35,9 @@ public class PemeriksaanController {
         model.addAttribute("pasiens", pasienService.getAll());
         return "index";
     }
-    
+
     @PostMapping("/save")
-    public String save(@Valid Pemeriksaan pemeriksaan){
+    public String save(@Valid Pemeriksaan pemeriksaan) {
         pemeriksaanService.save(pemeriksaan);
         return "redirect:/";
     }

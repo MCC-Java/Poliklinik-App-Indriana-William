@@ -34,22 +34,7 @@ public class PemeriksaanService {
         pemeriksaanRepository.delete(new Pemeriksaan(id));
     }
     
-    public void findById(Integer id) {
-        pemeriksaanRepository.findById(id).get();
+    public Pemeriksaan findById(Integer id) {
+        return pemeriksaanRepository.findById(id).get();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

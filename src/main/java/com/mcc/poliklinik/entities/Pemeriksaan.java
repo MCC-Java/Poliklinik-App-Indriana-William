@@ -11,6 +11,8 @@ import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -41,14 +43,14 @@ public class Pemeriksaan implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "id")
     private Integer id;
     @Basic(optional = false)
     @NotNull
     @Column(name = "tanggal")
-//    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Temporal(TemporalType.DATE)
     private Date tanggal;
     @Basic(optional = false)
@@ -58,7 +60,7 @@ public class Pemeriksaan implements Serializable {
     private String dokter;
     @Basic(optional = false)
     @NotNull
-    @Size(min = 1, max = 100)
+    @Size(min = 1, max = 50)
     @Column(name = "deskripsi")
     private String deskripsi;
     @JoinColumn(name = "pasien", referencedColumnName = "id")
@@ -111,8 +113,8 @@ public class Pemeriksaan implements Serializable {
         this.deskripsi = deskripsi;
     }
 
-    public String getPasien() {
-        return pasien.getNama();
+    public Pasien getPasien() {
+        return pasien;
     }
 
     public void setPasien(Pasien pasien) {
