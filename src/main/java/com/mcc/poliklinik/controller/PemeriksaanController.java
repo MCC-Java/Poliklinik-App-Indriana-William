@@ -45,9 +45,15 @@ public class PemeriksaanController {
         return "index";
     }
 
+//    @PostMapping("/save")
+//    public String save(@Valid String id, String tanggal, String deskripsi, Dokter dokter, Pasien pasien) {
+//        pemeriksaanService.save(id, tanggal, deskripsi, dokter, pasien);
+//        return "redirect:/";
+//    }
+    
     @PostMapping("/save")
-    public String save(@Valid String id, String tanggal, String deskripsi, String dokter, String pasien) {
-        pemeriksaanService.save(id, tanggal, deskripsi, dokter, pasien);
-        return "redirect:/";
+    public String save(@Valid Pemeriksaan pemeriksaan) {
+        pemeriksaanService.save(pemeriksaan);
+        return "index";
     }
 }

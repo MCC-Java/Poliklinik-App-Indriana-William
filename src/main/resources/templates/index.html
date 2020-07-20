@@ -47,8 +47,8 @@ and open the template in the editor.
                         <tr>
                             <th>No.</th>
                             <th>Tanggal</th>
-                            <th>Pasien</th>
                             <th>Dokter</th>
+                            <th>Pasien</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -56,8 +56,8 @@ and open the template in the editor.
                         <tr th:each="pemeriksaan: ${pemeriksaans}">
                             <td th:text="${pemeriksaan.id}"></td>
                             <td th:text="${pemeriksaan.tanggal}"></td>
-                            <td th:text="${pemeriksaan.pasien}"></td>
                             <td th:text="${pemeriksaan.dokter}"></td>
+                            <td th:text="${pemeriksaan.pasien}"></td>
                             <td>
                                 <a class="btn btn-warning">Update</a>
                                 <a class="btn btn-danger">Delete</a>

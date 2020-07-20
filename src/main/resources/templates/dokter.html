@@ -57,7 +57,7 @@ and open the template in the editor.
                             <td th:text="${dokter.poli}"></td>
                             <td>
                                 <a th:href="@{'/dokter/'+${dokter.id}}" class="btn btn-warning">Update</a>
-                                <a th:href="@{'/dokter/delete/'+${dokter.id}}" class="btn btn-danger">Delete</a>
+                                <a th:href="@{'/dokter/delete/'+${dokter.id}}" onclick="swDelete()" class="btn btn-danger">Delete</a>
                             </td>
                         </tr>
                     </tbody>
@@ -86,7 +86,7 @@ and open the template in the editor.
                         </div>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <input class="btn btn-success" type="submit" value="Save" style="margin: 10px;">
+                            <input class="btn btn-success" onclick="swDaftar()" type="submit" value="Save" style="margin: 10px;">
                         </div>
                     </form>
                 </div>
@@ -114,5 +114,30 @@ and open the template in the editor.
 
         <!--sweetalert-->
         <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+        <script>
+            function swDaftar() {
+                swal("Penambahan dokter berhasil!", "success");
+            }
+        </script>
+        <script>
+        function swDelete() {
+        swal({
+        title: "Are you sure?",
+        text: "Once deleted, you will not be able to recover this file!",
+        icon: "warning",
+        dangerMode: true,
+        })
+        .then((willDelete) => {
+        if (willDelete) {
+          swal("Berhasil menghapus!", {
+            buttons: true,
+            icon: "success",
+          });
+        } else {
+          swal("Gagal menghapus");
+        }
+        });
+        }
+        </script>
     </body>
 </html>
